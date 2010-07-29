@@ -1,0 +1,57 @@
+#!/usr/bin/ruby
+
+require 'rubygems'
+require 'sinatra'
+require 'haml'
+require 'open-uri'
+require 'json'
+
+get '/' do
+    haml <<END
+!!!
+%html
+  %head
+    %title Greetings
+  %body
+    %p Prepare to be greeted
+    %form{:action => 'translate', :method => 'post'}
+      - inputs = ['language_from', 'language_to', 'text']
+      - for i in inputs do
+        %input{:type => 'text', :name => i}
+      %input{:type => 'submit', :value => 'Translate'}
+END
+end
+
+get '/translate/:name' do
+    translate(params[:language_from],params[:language_to],params[:text])
+end
+
+post '/translate' do
+    translate(params[:language_from],params[:language_to],params[:text])
+end
+
+private
+
+def translate(l1,l2,text)
+
+  base_url = 'http://ajax.googleapis.com/ajax/services/language/translate?'
+
+  params = ["langpair=#{l1}|#{l2}", "q=#{text}", "v=1.0"].join("&")
+
+  url = base_url + params
+
+  content = open( URI.encode(url) ).read()
+
+  dict = JSON.parse(content)
+
+  haml <<END
+!!!
+%html
+  %head
+    %title Lostranslation
+  %body
+    %h1 Heya!
+    %p= "I got <em> #{dict['responseData']['translatedText']} </em>"
+END
+end
+
