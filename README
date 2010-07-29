@@ -1,0 +1,8 @@
+This is a small application written by me, to learn to use Sinatra, tools and other haml, heroku not deploy.
+
+Also, I&#39;m having a great time :)
+
+The idea here and receive a text and a pair (source, target) language and make successive translations between two languages (round trip). The end result is a poorly translated text.
+
+The development will be slow, since I&#39;m on vacation and I&#39;m lazy. You clever person, you may have noticed that he is looking for a very refined kind of joke. You can laugh.
+
