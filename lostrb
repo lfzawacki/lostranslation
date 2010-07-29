@@ -11,9 +11,11 @@ get '/' do
 !!!
 %html
   %head
-    %title Greetings
+    %title Lostranslation
   %body
-    %p Prepare to be greeted
+    %h2 lossy text translation
+    %p just give me some text and I'll translate it
+
     %form{:action => 'translate', :method => 'post'}
       - inputs = ['language_from', 'language_to', 'text']
       - for i in inputs do
@@ -50,7 +52,7 @@ def translate(l1,l2,text)
   %head
     %title Lostranslation
   %body
-    %h1 Heya!
+    %h1 That's easy!
     %p= "I got <em> #{dict['responseData']['translatedText']} </em>"
 END
 end
